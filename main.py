@@ -7,6 +7,14 @@ from ai import *
 from game import *
 from car import *
 
+def printOutput(generation, fitness, gates, frames, distance):
+	print('-' * 20)
+	print('Best Of Generation {}'.format(generation))
+	print('Fitness: {}'.format(fitness))
+	print('Gates: {}'.format(gates))
+	print('Frames: {}'.format(frames))
+	print('Distance: {}'.format(distance))
+
 def selectParent(ais, fitnessSum):
 	rand = random.uniform(0, fitnessSum)
 	currentSum = 0
@@ -162,7 +170,7 @@ def main():
 					child.mutate()
 				children.append(child)
 			ais.sort(key=lambda x: x.fitness, reverse=True)
-			print([generation, ais[0].fitness, ais[0].gates, ais[0].frames, ais[0].distance])
+			printOutput(generation, ais[0].fitness, ais[0].gates, ais[0].frames, ais[0].distance)
 			ais = [ais[0]] + children
 			generation += 1
 			for i in range(len(game.cars)):

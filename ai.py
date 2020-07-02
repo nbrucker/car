@@ -44,6 +44,7 @@ class AI():
 						self.weights[i][j][k] = x
 
 	def setInputs(self, inputs):
+		# Checks the number of inputs, if everything's ok set them in the input layer
 		if (len(inputs) != len(self.layers[0])):
 			raise Exception('Error')
 		self.layers[0] = inputs.copy()
@@ -54,14 +55,13 @@ class AI():
 				value = 0
 				for previousNeuronIndex in range(len(self.layers[layerIndex - 1])):
 					value += self.layers[layerIndex - 1][previousNeuronIndex] * self.weights[layerIndex - 1][neuronIndex][previousNeuronIndex]
-				if (self.activations[layerIndex - 1] == 'sigmoid'):
-					self.layers[layerIndex][neuronIndex] = self.sigmoid(value)
-				else:
-					self.layers[layerIndex][neuronIndex] = self.binary(value)
+				self.layers[layerIndex][neuronIndex] = eval('self.' + self.activations[layerIndex - 1])(value)
 		return self.layers[len(self.layers) - 1].copy()
 	
 	def sigmoid(self, x):
+		# Simple sigmoid function
 		return 1 / (1 + math.exp(-x))
 
 	def binary(self, x):
+		# Returns 1 if x is positive, else 0
 		return 1 if x > 0 else 0
