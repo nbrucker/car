@@ -13,7 +13,7 @@ def selectParent(ais, fitnessSum):
 	for ai in ais:
 		currentSum += ai.fitness
 		if (currentSum > rand):
-			return (ai)
+			return ai
 
 def getFitnessSum(ais):
 	fitnessSum = 0
@@ -101,8 +101,8 @@ def main():
 
 				distances = []
 				for direction in directions:
-					inital = direction[0] + Vector2(car.rect.center)
-					position = inital
+					initial = direction[0] + Vector2(car.rect.center)
+					position = initial
 					dead = True
 					while (game.screen.get_at([int(position[0]), int(position[1])]) != (0, 0, 0, 255)):
 						dead = False
@@ -110,14 +110,14 @@ def main():
 					if (dead):
 						car.alive = False
 						break
-					distance = max(abs(inital[0] - position[0]), abs(inital[1] - position[1]))
+					distance = max(abs(initial[0] - position[0]), abs(initial[1] - position[1]))
 					distances.append(1 / distance)
-					line1 = LineString([inital, position])
+					line1 = LineString([initial, position])
 					line2 = LineString(game.gates[ai.gates % len(game.gates)])
 					point = line1.intersection(line2)
 					if (point.geom_type == 'Point'):
 						point = Point(point)
-						distances.append(1 / max(abs(point.x - inital[0]), abs(point.y - inital[1])))
+						distances.append(1 / max(abs(point.x - initial[0]), abs(point.y - initial[1])))
 					else:
 						distances.append(1 / math.inf)
 				
