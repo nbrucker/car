@@ -1,6 +1,3 @@
-import pygame
-from copy import deepcopy
-import shapely
 from shapely.geometry import LineString, Point
 
 from ai import *

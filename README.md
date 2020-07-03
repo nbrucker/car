@@ -38,5 +38,5 @@ pip install pygame shapely
 ## Usage
 
 ```bash
-python main.py
+python src/main.py
 ```
