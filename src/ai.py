@@ -3,19 +3,17 @@ import math
 
 class AI():
 	def __init__(self, layers, activations):
+		# Initialization
 		self.layers = [[0] * layer for layer in layers]
 		self.weights = []
 		if (len(activations) != len(layers) - 1):
 			raise Exception('Error')
 		self.activations = activations
 		self.maxFrames = 100
-		self.framesSinceLastGate = 0
-		self.frames = 0
-		self.gates = 0
-		self.fitness = 0
-		self.distance = 0
+		self.reset()
 	
 	def reset(self):
+		# Resets the AI's state
 		self.framesSinceLastGate = 0
 		self.frames = 0
 		self.gates = 0
@@ -23,6 +21,7 @@ class AI():
 		self.distance = 0
 
 	def initWeights(self):
+		# Every weight is initialized to a random value between -1 and 1
 		weights = []
 		for index in range(len(self.layers) - 1):
 			layer = []
@@ -35,9 +34,11 @@ class AI():
 		self.weights = weights
 
 	def mutate(self):
+		# Mutation function
 		for i in range(len(self.weights)):
 			for j in range(len(self.weights[i])):
 				for k in range(len(self.weights[i][j])):
+					# Each weight has a 5% chances to be modified
 					if (random.randint(1, 100) <= 5):
 						x = self.weights[i][j][k] + random.uniform(-1, 1)
 						x = max(min(x, 1), -1)
@@ -50,6 +51,7 @@ class AI():
 		self.layers[0] = inputs.copy()
 
 	def forwardPropagation(self):
+		# Simple forward propagation layer by layer
 		for layerIndex in range(1, len(self.layers)):
 			for neuronIndex in range(len(self.layers[layerIndex])):
 				value = 0

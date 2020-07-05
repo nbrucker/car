@@ -4,6 +4,7 @@ from copy import deepcopy
 
 class Car():
 	def __init__(self):
+		# Initialization
 		self.path = 'assets/car.png'
 
 		self.size = [40, 20]
@@ -15,18 +16,18 @@ class Car():
 		self.image = pygame.transform.scale(self.image, self.size)
 		self.original = self.image
 		self.image = pygame.transform.rotate(self.image, self.rotation)
-	
 		self.rect = self.image.get_rect(center=self.position)
 
-	def update(self):
-		self.position += self.velocity.rotate(-self.rotation)
-
-		self.image = pygame.transform.rotate(self.original, self.rotation)
-		self.rect.center = self.position
-		self.rect = self.image.get_rect(center=self.rect.center)
-	
 	def reset(self):
+		# Resets the car's state
 		self.position = deepcopy(self.initialPosition)
 		self.velocity = Vector2(0, 0)
 		self.rotation = self.initialRotation
 		self.alive = True
+
+	def update(self):
+		# Update the car's position and rotation
+		self.position += self.velocity.rotate(-self.rotation)
+		self.image = pygame.transform.rotate(self.original, self.rotation)
+		self.rect.center = self.position
+		self.rect = self.image.get_rect(center=self.rect.center)
