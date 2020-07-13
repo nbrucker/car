@@ -109,7 +109,7 @@ def main():
 					initial = direction[0] + Vector2(car.rect.center)
 					position = initial
 					dead = True
-					# For each direction we basically cast a ray to find the closest wallz
+					# For each direction we basically cast a ray to find the closest wall
 					while (game.screen.get_at([int(position[0]), int(position[1])]) != (0, 0, 0, 255)):
 						dead = False
 						position = [position[0] + direction[1], position[1] + direction[2]]
