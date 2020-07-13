@@ -182,6 +182,7 @@ def main():
 				parentB = selectParent(ais, fitnessSum)
 				child = deepcopy(parentA)
 				child.weights = mixWeights(parentA.weights, parentB.weights)
+				# Each child has a 80% chances to mutate
 				if (random.randint(1, 100) <= 80):
 					child.mutate()
 				children.append(child)

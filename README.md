@@ -3,7 +3,10 @@
 The goal of this project was to create an AI that would learn how to drive a car on a 2D track.
 
 The AI is using a genetic algorithm to evolve. Each generation is composed of 10 individuals.
-The neural network is made up of a input layer of 18 neurons, an hidden layer of 10 neurons with a sigmoid activation and an output layer of 4 neurons with a binary activation.
+The neural network is made up of:
+- An input layer of 18 neurons.
+- An hidden layer of 10 neurons with a sigmoid activation.
+- An output layer of 4 neurons with a binary activation.
 
 The car is rewarded each time it passes a gate.
 Gates are simple line drawn throughout the tracks.
@@ -11,9 +14,9 @@ There is only one gate activated at a time, when a gate is passed the next one g
 
 The car sees in 8 directions around itself.
 The neural network is fed:
-- The distance to the gate and to the wall in each of those 8 directions.
-- The rotation of the car.
-- The velocity of the car.
+- 16 values of the distance to the gate and to the wall in each of those 8 directions.
+- 1 value for the rotation of the car.
+- 1 value for the velocity of the car.
 
 The car has then 4 possible actions since the neural network has an output layer of 4 neurons, go forward, go backward, turn left and turn right.
 
@@ -23,9 +26,9 @@ Here's the fitness calculation function:
 ```python
 (distance / frames) + (gates * 500)
 ```
-Distance is the distance traveled by the car.\
-Frames is the number of frames that the car stayed alive for.\
-Gates is the number of gates that the car passed.
+'distance' is the distance traveled by the car.\
+'frames' is the number of frames that the car stayed alive for.\
+'gates' is the number of gates that the car passed.
 
 We put such a big emphasis on gates to entice the car to pass them as fast as possible.
 
